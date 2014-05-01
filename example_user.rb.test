@@ -1,0 +1,15 @@
+class user 
+	
+	#create accessor - getter / setter methods
+	attr_accessor :name :email #attribute accessor 
+
+	def initialize (attributes = {}) #one arg with default value of empty hash
+		@name = attributes[:name] #instance variable :name in the hash
+		@email = attributes[:email]
+	end 
+
+	def formatted_email 
+		@name + '<' + @email + '>'
+		#{}"#{@name} <#{@email}>"
+	end
+end
