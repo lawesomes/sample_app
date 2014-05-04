@@ -1,12 +1,10 @@
 class User < ActiveRecord::Base
-	
-	before_save { self.email = email.downcase }
-	#call back - to save ensure email is saved as lowercase
+  before_save { self.email = email.downcase }
+  #call back - to save ensure email is saved as lowercase
 
-
-	validates :name, presence: true, length: {maximum: 50}
-	VALIDATE_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
-		#/ start of regex
+  validates :name, presence: true, length: { maximum: 50 }
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  	#/ start of regex
 		#\a match staart of string 
 		#[\w+\-.]+ - at least one word character, plus, hypen or a dot
 		#@ literal 
@@ -17,12 +15,12 @@ class User < ActiveRecord::Base
 		#/end og regex
 		#i case insensitive
 
-	validates :email, presence: true, format: {with: VALIDATE_EMAIL_REGEX}, uniqueness: {case_sensitive: false} 
-	#also need to enforce uniqueness at database level 
+  validates :email, presence:   true,
+                    format:     { with: VALID_EMAIL_REGEX },
+                    uniqueness: { case_sensitive: false }
+  #also need to enforce uniqueness at database level 
 
-	has_secure_password
-	#adds the password / password_confirmation attrbiutes required to compared hashed user input to password_Digest
-	
-	validates :password, length {minimum: 6}
+  has_secure_password
+  validates :password, length: { minimum: 6 }
 
 end
